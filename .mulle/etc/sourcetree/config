@@ -1,0 +1,4 @@
+mulle-thread;${MULLE_THREAD_NODETYPE:-tar};no-all-load,no-import,no-singlephase;0dc6c709-0978-4f1a-b54f-8347950f0075;${MULLE_THREAD_URL:-https://github.com/mulle-concurrent/mulle-thread/archive/${MULLE_BRANCH}.tar.gz};${MULLE_THREAD_BRANCH:-latest};;;
+dlfcn;none;no-all-load,no-build,no-cmakeinherit,no-delete,no-dependency,no-fs,no-import,no-require,no-share,no-update,only-os-mingw;29392790-960a-4f51-a548-51eb0434166b;;;;;aliases=dl,dlfcn
+dl;none;no-all-load,no-build,no-cmakeinherit,no-delete,no-dependency,no-fs,no-import,no-os-mingw,no-require,no-share,no-update;297c1122-609f-40c2-9734-de0640c92ec0;;;;;include=dlfcn.h
+
