@@ -16,6 +16,5 @@ src/include-private.h
 set( PUBLIC_HEADERS
 src/include.h
 src/mulle-atinit.h
-src/mulle-atinit.inc
 )
 

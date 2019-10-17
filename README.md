@@ -1,12 +1,14 @@
 # mulle-atinit
 
-👼 Compatibility library to fix ELF initializer deficiencies
+🤱🏼 Compatibility library for deterministic initializers
 
-This is a workaround for dynamic libraries initiializers not being properly
-sequenced (ELF).
+This is a workaround for dynamic libraries initializers not being properly
+sequenced (e.g. ELF bases shared library).
 
-This library must be **statically** linked. Then its constructor is
-guaranteed to be called after all shared library initializations.
+You must **statically** link this library with your executable. Ensure that
+global symbols are exported and that the whole library is linked to the
+executable and not optimized away by the linker.
+
 
 Any participating shared library constructor uses
 
@@ -16,7 +18,7 @@ mulle_atinit( f, userinfo, priority);
 
 to defer `atinit` to a later date. The function `f` will be called properly
 sequenced before main. `userinfo` will be passed as the only parameter.
-Use priority 0 normally. Usse higher priorities to move initializers ahead
+Use priority 0 normally. Use higher priorities to move initializers ahead
 or postpone with lower priorities.
 
 

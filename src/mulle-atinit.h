@@ -1,11 +1,13 @@
 #include <stdint.h>
+#include <mulle-dlfcn/mulle-dlfcn.h>
+
 
 /*
  *  (c) 2019 nat ORGANIZATION
  *
  *  version:  major, minor, patch
  */
-#define MULLE_ATINIT_VERSION  ((0 << 20) | (0 << 8) | 1)
+#define MULLE_ATINIT_VERSION  ((0 << 20) | (0 << 8) | 2)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
@@ -29,7 +31,18 @@ static inline unsigned int   mulle_atinit_get_version_patch( void)
 extern uint32_t   mulle_atinit_get_version( void);
 
 
-#ifdef __linux
+#ifdef __APPLE__
+
+//
+// we don't need it on __APPLE_ as the __attribute__((constructor)) order is
+// correct
+//
+static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
+{
+   (*f)( userinfo);
+}
+
+#else
 
 
 #include "include.h"
@@ -80,8 +93,7 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
    extern void   *dlsym( void *, const char *);
    char          *s;
 
-   // don't want to force _GNU_SOURCE here so we use 0
-   p_mulle_atinit = dlsym( 0, "_mulle_atinit");
+   p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "_mulle_atinit");
    if( ! p_mulle_atinit)
    {
       mulle_atinit_fail( f, userinfo);
@@ -90,12 +102,6 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
    (*p_mulle_atinit)( f, userinfo, priority);
 }
 
-
-#else
-
-static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
-{
-   (*f)( userinfo);
-}
-
 #endif
+
+

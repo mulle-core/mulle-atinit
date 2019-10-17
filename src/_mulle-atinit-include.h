@@ -8,27 +8,12 @@
 #ifndef _mulle_atinit_include_h__
 #define _mulle_atinit_include_h__
 
-// library: remove with `mark no-header`, rename with `set include`
+// remove with `mulle-sourcetree mark mulle-thread no-header`
+// rename with `mulle-sourcetree mark mulle-thread set include whatever.h`
 # include <mulle-thread/mulle-thread.h>   // mulle-thread
 
-// library: remove with `mark no-header`, rename with `set include`
-# if defined( _WIN32)
-# ifdef __has_include
-#  if __has_include(<dlfcn.h>)
-#    include <dlfcn.h>   // dlfcn
-#   define HAVE_LIB_DLFCN
-#  endif
-# endif
-# endif
-
-// library: remove with `mark no-header`, rename with `set include`
-# if ! defined( _WIN32)
-# ifdef __has_include
-#  if __has_include(<dlfcn.h>)
-#    include <dlfcn.h>   // dl
-#   define HAVE_LIB_DL
-#  endif
-# endif
-# endif
+// remove with `mulle-sourcetree mark mulle-dlfcn no-header`
+// rename with `mulle-sourcetree mark mulle-dlfcn set include whatever.h`
+# include <mulle-dlfcn/mulle-dlfcn.h>   // mulle-dlfcn
 
 #endif
