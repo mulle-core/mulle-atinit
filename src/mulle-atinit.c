@@ -44,14 +44,12 @@ static struct
    unsigned int                  n;
    unsigned int                  size;
    struct prioritized_callback   *calls;
-} vars =
-{
-   MULLE_THREAD_ONCE_INIT
-};
+} vars;
 
 
 static void   init( void)
 {
+   assert( MULLE_THREAD_ONCE_INIT == 0);
    mulle_thread_mutex_init( &vars.lock);
 }
 
@@ -99,7 +97,8 @@ loop:
    if( f)
    {
       if( trace)
-        fprintf( stderr, "mulle-atinit: call %p\n", (void *) f);
+        fprintf( stderr, "mulle-atinit: call %p( %p)\n",
+                              (void *) f, userinfo);
 
       (*f)( userinfo);
 
@@ -138,7 +137,8 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 #endif
          mulle_thread_mutex_unlock( &vars.lock);
          if( trace)
-           fprintf( stderr, "mulle-atinit: redirect %p\n", (void *) f);
+           fprintf( stderr, "mulle-atinit: redirect %p( %p)\n",
+                     (void *) f, userinfo);
          (*f)( userinfo);
          return;
       }
@@ -158,7 +158,7 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
    mulle_thread_mutex_unlock( &vars.lock);
 
    if( trace)
-     fprintf( stderr, "mulle-atinit: add %p\n", (void *) f);
+     fprintf( stderr, "mulle-atinit: add %p( %p)\n", (void *) f, userinfo);
 }
 
 
