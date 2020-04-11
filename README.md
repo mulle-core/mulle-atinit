@@ -29,7 +29,7 @@ Use [mulle-sde](//github.com/mulle-sde) to add mulle-atinit to your project:
 ```
 mulle-sde dependency add --c \
                          --github mulle-core \
-                         --marks no-dynamic-link,no-intermediate-link,no-singlephase \
+                         --marks no-dynamic-link,no-intermediate-link,no-singlephase,all-load \
                          mulle-atinit
 ```
 
