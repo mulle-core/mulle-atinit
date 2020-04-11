@@ -22,21 +22,50 @@ Use priority 0 normally. Use higher priorities to move initializers ahead
 or postpone with lower priorities.
 
 
+## Add 
 
-## Build
-
-This is a [mulle-sde](https://mulle-sde.github.io/) project.
-
-It has it's own virtual environment, that will be automatically setup for you
-once you enter it with:
+Use [mulle-sde](//github.com/mulle-sde) to add mulle-atinit to your project:
 
 ```
-mulle-sde mulle-atinit
+mulle-sde dependency add --c \
+                         --github mulle-core \
+                         --marks no-singlephase \
+                         mulle-atinit
 ```
 
-Now you can let **mulle-sde** fetch the required dependencies and build the
-project for you:
+
+## Install
+
+### mulle-sde
+
+Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-atinit and all dependencies:
 
 ```
-mulle-sde craft
+mulle-sde install --prefix /usr/local \
+   https://github.com/mulle-core/mulle-atinit/archive/latest.tar.gz
 ```
+
+### Manual Installation
+
+
+Install the requirements:
+
+Requirements                                               | Description
+-----------------------------------------------------------|-----------------------
+[mulle-thread](//github.com/mulle-concurrent/mulle-thread) | Threads and atomics
+[mulle-dlfcn](//github.com/mulle-core/mulle-dlfcn)         | Cross-platform dlfcn
+
+
+Install into `/usr/local`:
+
+```
+mkdir build 2> /dev/null
+(
+   cd build ;
+   cmake -DCMAKE_INSTALL_PREFIX=/usr/local \
+         -DCMAKE_PREFIX_PATH=/usr/local \
+         -DCMAKE_BUILD_TYPE=Release .. ;
+   make install
+)
+```
+
