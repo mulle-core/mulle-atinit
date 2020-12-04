@@ -14,20 +14,11 @@
 
 // How to tweak the following mulle-thread #include
 //    remove:          `mulle-sourcetree mark mulle-thread no-header`
-//    rename:          `mulle-sourcetree mark mulle-thread set include whatever.h`
+//    rename:          `mulle-sde dependency|library set mulle-thread include whatever.h`
 //    toggle #import:  `mulle-sourcetree mark mulle-thread [no-]import`
 //    toggle public:   `mulle-sourcetree mark mulle-thread [no-]public`
 //    toggle optional: `mulle-sourcetree mark mulle-thread [no-]require`
 //    remove for os:   `mulle-sourcetree mark mulle-thread no-os-<osname>`
 # include <mulle-thread/mulle-thread.h>   // mulle-thread
-
-// How to tweak the following mulle-dlfcn #include
-//    remove:          `mulle-sourcetree mark mulle-dlfcn no-header`
-//    rename:          `mulle-sourcetree mark mulle-dlfcn set include whatever.h`
-//    toggle #import:  `mulle-sourcetree mark mulle-dlfcn [no-]import`
-//    toggle public:   `mulle-sourcetree mark mulle-dlfcn [no-]public`
-//    toggle optional: `mulle-sourcetree mark mulle-dlfcn [no-]require`
-//    remove for os:   `mulle-sourcetree mark mulle-dlfcn no-os-<osname>`
-# include <mulle-dlfcn/mulle-dlfcn.h>   // mulle-dlfcn
 
 #endif

@@ -6,7 +6,7 @@
 
 static void   x( void *s)
 {
-   printf( "%s: \"%s\"\n", __PRETTY_FUNCTION__, s);
+   printf( "%s: \"%s\"\n", __FUNCTION__, s);
 }
 
 
