@@ -1,10 +1,10 @@
 cmake_minimum_required( VERSION 3.1)
 
 
-project( 20_dynamic.exe C)
+project( dynamic.exe C)
 
 
-add_executable( 20_dynamic.exe
+add_executable( dynamic.exe
 main.c
 )
 
@@ -22,23 +22,22 @@ z.c
 )
 
 
-add_dependencies( 20_dynamic.exe x y z)
+add_dependencies( dynamic.exe x y z)
 
 if( APPLE)
 
-target_link_libraries( 20_dynamic.exe
--Wl,--whole-archive
-x
-y
-z
--Wl,--no-whole-archive
+# for apple we reorder the libraries in the desired order
+target_link_libraries( dynamic.exe
+-force_load x
+-force_load z
+-force_load y
 ${TEST_LIBRARIES}
 )
 
 else()
 
 
-target_link_libraries( 20_dynamic.exe
+target_link_libraries( dynamic.exe
 -Wl,--whole-archive -Wl,--no-as-needed
 x
 y
