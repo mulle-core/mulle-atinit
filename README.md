@@ -1,6 +1,6 @@
 # mulle-atinit
 
-🤱🏼 Compatibility library for deterministic initializers
+#### 🤱🏼 Compatibility library for deterministic initializers
 
 This is a workaround for dynamic libraries initializers not being properly
 sequenced (e.g. ELF bases shared library).
@@ -22,7 +22,7 @@ Use priority 0 normally. Use higher priorities to move initializers ahead
 or postpone with lower priorities.
 
 
-## Add 
+## Add
 
 Use [mulle-sde](//github.com/mulle-sde) to add mulle-atinit to your project:
 
