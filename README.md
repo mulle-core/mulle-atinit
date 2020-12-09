@@ -5,6 +5,11 @@
 This is a workaround for dynamic libraries initializers not being properly
 sequenced (e.g. ELF bases shared library).
 
+| Release Version
+|-----------------------------------
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-c/mulle-atinit/actions)
+
+
 You must **statically** link this library with your executable. Ensure that
 global symbols are exported and that the whole library is linked to the
 executable and not optimized away by the linker.
