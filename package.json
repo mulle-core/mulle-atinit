@@ -1,0 +1,17 @@
+{
+   "name" : "mulle-atinit",
+   "version" : "0.0.5",
+   "description" : "🤱🏼 Compatibility library for deterministic initializers",
+   "homepage" : "https://github.com/mulle-core/mulle-atinit",
+   "bugs" : "https://github.com/mulle-core/mulle-atinit/issues",
+   "keywords" : [],
+   "license" : "UNLICENSED",
+   "repository" : {
+      "type" : "git",
+      "url" : "mulle-core/mulle-atinit"
+   },
+   "dependencies" : {
+      "mulle-thread" : "mulle-concurrent/mulle-thread",
+      "mulle-dlfcn" : "mulle-core/mulle-dlfcn"
+   }
+}
