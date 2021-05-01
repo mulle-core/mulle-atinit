@@ -7,19 +7,19 @@ export PROJECT_NAME="mulle-atinit"
 #
 #
 #
-export PROJECT_IDENTIFIER="mulle_atinit"
 
-
-#
-#
-#
-export PROJECT_DOWNCASE_IDENTIFIER="mulle_atinit"
 
 
 #
 #
 #
-export PROJECT_UPCASE_IDENTIFIER="MULLE_ATINIT"
+
+
+
+#
+#
+#
+
 
 
 #
