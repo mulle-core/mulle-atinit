@@ -6,19 +6,19 @@
 
 static void   a( void *s)
 {
-   printf( "%s: \"%s\"\n", __FUNCTION__, s);
+   printf( "%s: \"%s\"\n", __FUNCTION__, (char *) s);
 }
 
 
 static void   b( void *s)
 {
-   printf( "%s: \"%s\"\n", __FUNCTION__, s);
+   printf( "%s: \"%s\"\n", __FUNCTION__, (char *) s);
 }
 
 
 static void   c( void *s)
 {
-   printf( "%s: \"%s\"\n", __FUNCTION__, s);
+   printf( "%s: \"%s\"\n", __FUNCTION__, (char *) s);
 }
 
 
