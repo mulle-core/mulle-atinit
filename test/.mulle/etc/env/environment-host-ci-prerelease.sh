@@ -1,4 +1,3 @@
-# Fill it with mulle-env envirionment --scope  set <key> <value>
 #
 # mulle-atinit nodetype: ${MULLE_ATINIT_NODETYPE:-tar}
 #
