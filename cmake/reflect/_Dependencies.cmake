@@ -15,7 +15,7 @@ endif()
 #
 # Generated from sourcetree: 59CB53C7-26AF-4465-8ED5-DDC19BC80FC8;mulle-dlfcn;no-actual-link,no-all-load,no-cmake-searchpath,no-import,no-public,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-dlfcn no-header`
-# Disable for this platform: `mulle-sourcetree mark mulle-dlfcn no-cmake-platform-linux`
+# Disable for this platform: `mulle-sourcetree mark mulle-dlfcn no-cmake-platform-darwin`
 #
 if( NOT MULLE_DLFCN_HEADER)
    find_file( MULLE_DLFCN_HEADER NAMES mulle-dlfcn.h mulle-dlfcn/mulle-dlfcn.h)
@@ -83,7 +83,7 @@ endif()
 #
 # Generated from sourcetree: A94E8C92-7299-4142-8A5C-2144E763D383;mulle-thread;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-thread no-link`
-# Disable for this platform: `mulle-sourcetree mark mulle-thread no-cmake-platform-linux`
+# Disable for this platform: `mulle-sourcetree mark mulle-thread no-cmake-platform-darwin`
 #
 if( NOT MULLE_THREAD_LIBRARY)
    find_library( MULLE_THREAD_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-thread${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-thread NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH)
