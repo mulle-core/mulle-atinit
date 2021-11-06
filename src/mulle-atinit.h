@@ -90,7 +90,11 @@ static inline void   mulle_atinit_fail( void (*f)( void *), void *userinfo)
 
 static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 {
-   void  (*p_mulle_atinit)( void (*f)( void *), void *, int);
+   // this is et
+#ifdef __MULLE_STATICALLY_LINKED__
+   _mulle_atinit( f, userinfo, priority);
+#else
+   void          (*p_mulle_atinit)( void (*f)( void *), void *, int);
    extern void   *dlsym( void *, const char *);
    char          *s;
 
@@ -101,6 +105,7 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
       return;
    }
    (*p_mulle_atinit)( f, userinfo, priority);
+#endif
 }
 
 #endif
