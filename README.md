@@ -10,10 +10,11 @@ sequenced (e.g. ELF bases shared library).
 | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-c/mulle-atinit/actions)
 
 
-You must **statically** link this library with your executable. Ensure that
-global symbols are exported and that the whole library is linked to the
-executable and not optimized away by the linker.
+You must **statically** link this library with your executable. All other
+libraries can stay dynamic or static as you choose.
 
+Ensure that global symbols are exported and that the whole library is linked
+to the executable and not optimized away by the linker.
 
 Any participating shared library constructor uses
 
@@ -25,6 +26,13 @@ to defer `atinit` to a later date. The function `f` will be called properly
 sequenced before main. `userinfo` will be passed as the only parameter.
 Use priority 0 normally. Use higher priorities to move initializers ahead
 or postpone with lower priorities.
+
+### Missing `dlsym`
+
+If you are linking your executable statically and `dlsym` is not available
+(musl) then you must define `__MULLE_STATICALLY_LINKED__`, when building all
+dependencies that use `mulle_atinit`. Dynamic linking with a missing `dlsym`
+won't work.
 
 
 ## Add
