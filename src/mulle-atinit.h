@@ -96,7 +96,6 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 #else
    void          (*p_mulle_atinit)( void (*f)( void *), void *, int);
    extern void   *dlsym( void *, const char *);
-   char          *s;
 
    p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "_mulle_atinit");
    if( ! p_mulle_atinit)
