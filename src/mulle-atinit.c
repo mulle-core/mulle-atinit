@@ -426,8 +426,8 @@ COPY:             b = t;
 static void
 setup(uint8_t *list1, uint8_t *list2, size_t n, size_t size, cmp_t cmp)
 {
-   int i, length, size2, tmp, sense;
-   uint8_t *f1, *f2, *s, *l2, *last, *p2;
+   int i, size2, tmp;
+   uint8_t *f1, *s, *last, *p2;
 
    size2 = size*2;
    if (n <= 5) {
