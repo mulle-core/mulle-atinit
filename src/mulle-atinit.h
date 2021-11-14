@@ -1,7 +1,6 @@
-#include <stdint.h>
-#include <mulle-c11/mulle-c11.h>
-#include <mulle-dlfcn/mulle-dlfcn.h>
+#include "include.h"
 
+#include <stdint.h>
 
 /*
  *  (c) 2019 nat ORGANIZATION
@@ -28,37 +27,36 @@ static inline unsigned int   mulle_atinit_get_version_patch( void)
    return( MULLE_ATINIT_VERSION & 0xFF);
 }
 
+MULLE_ATINIT_EXTERN_GLOBAL
+uint32_t   mulle_atinit_get_version( void);
 
-extern uint32_t   mulle_atinit_get_version( void);
-
-
-#ifdef __APPLE__
 
 //
 // we don't need it on __APPLE_ as the __attribute__((constructor)) order is
-// correct
+// correct. On windows it seems hopeless, so we just give up.
 //
+#if defined( __APPLE__) 
+
 static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 {
    (*f)( userinfo);
 }
 
+#elif defined( _WIN32)
+
+static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
+{
+#ifdef __MULLE_STATICALLY_LINKED__
+   _mulle_atinit( f, userinfo, priority);
 #else
+   (*f)( userinfo);  // wrong but no dice with dlfcn so far
+#endif
+}
 
-
-#include "include.h"
+#else 
 
 #include <stdlib.h>
 #include <stdio.h>
-
-
-/*
-   Add other library headers here like so, for exposure to library
-   consumers.
-
-   # include "foo.h"
-*/
-
 
 //
 // this is called by a `__attribute__((constructor))`
@@ -69,7 +67,8 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 //    mulle_atinit( f, NULL, priority);
 // }
 //
-extern void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority);
+MULLE_ATINIT_EXTERN_GLOBAL
+void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority);
 
 static inline void   mulle_atinit_fail( void (*f)( void *), void *userinfo)
 {
@@ -90,12 +89,10 @@ static inline void   mulle_atinit_fail( void (*f)( void *), void *userinfo)
 
 static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 {
-   // this is et
 #ifdef __MULLE_STATICALLY_LINKED__
    _mulle_atinit( f, userinfo, priority);
 #else
-   void          (*p_mulle_atinit)( void (*f)( void *), void *, int);
-   extern void   *dlsym( void *, const char *);
+   void   (*p_mulle_atinit)( void (*f)( void *), void *, int);
 
    p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "_mulle_atinit");
    if( ! p_mulle_atinit)
