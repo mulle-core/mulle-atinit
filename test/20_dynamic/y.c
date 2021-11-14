@@ -4,9 +4,11 @@
 #include <stdio.h>
 
 
-static void   y( void *s)
+MULLE_C_GLOBAL
+void   y( void *s)
 {
    printf( "%s: \"%s\"\n", __FUNCTION__, (char *) s);
+   fflush( stdout);
 }
 
 

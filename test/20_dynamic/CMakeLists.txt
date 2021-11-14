@@ -4,9 +4,15 @@ cmake_minimum_required( VERSION 3.1)
 project( dynamic.exe C)
 
 
+message( STATUS "TEST_LIBRARIES=${TEST_LIBRARIES}")
+
+#cmake_policy(SET CMP0049 OLD)
+
 add_executable( dynamic.exe
 main.c
 )
+
+set_target_properties( dynamic.exe PROPERTIES OUTPUT_NAME "dynamic")
 
 
 add_library( x SHARED
@@ -36,13 +42,22 @@ ${TEST_LIBRARIES}
 
 else()
 
-
 target_link_libraries( dynamic.exe
--Wl,--whole-archive -Wl,--no-as-needed
 x
 y
 z
--Wl,--as-needed  -Wl,--no-whole-archive
+${TEST_LIBRARIES}
+)
+
+target_link_libraries( x
+${TEST_LIBRARIES}
+)
+
+target_link_libraries( y
+${TEST_LIBRARIES}
+)
+
+target_link_libraries( z
 ${TEST_LIBRARIES}
 )
 
