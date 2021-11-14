@@ -83,7 +83,7 @@ endif()
 
 
 #
-# Generated from sourcetree: 59CB53C7-26AF-4465-8ED5-DDC19BC80FC8;mulle-dlfcn;no-all-load,no-cmake-searchpath,no-import,no-public,no-singlephase;
+# Generated from sourcetree: 59CB53C7-26AF-4465-8ED5-DDC19BC80FC8;mulle-dlfcn;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-dlfcn no-link`
 # Disable for this platform: `mulle-sourcetree mark mulle-dlfcn no-cmake-platform-windows`
 #
