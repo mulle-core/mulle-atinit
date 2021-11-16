@@ -1,12 +1,15 @@
-cmake_minimum_required( VERSION 3.1)
-
+cmake_minimum_required( VERSION 3.4)
 
 project( dynamic.exe C)
 
-
 message( STATUS "TEST_LIBRARIES=${TEST_LIBRARIES}")
 
-#cmake_policy(SET CMP0049 OLD)
+#
+# for windows its important to hit the proper flags like
+# the libraries have been built with
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Zi -DEBUG -MDd -Od -wd4068")
+
 
 add_executable( dynamic.exe
 main.c
@@ -22,6 +25,17 @@ x.c
 add_library( y SHARED
 y.c
 )
+
+# this works
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+# supposedly useful sometimes
+# set( CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+#
+# none of these do anything :(
+#
+# set( CMAKE_WINDOWS_EXPORT_SYMBOLS ON)
+# set( WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 add_library( z SHARED
 z.c

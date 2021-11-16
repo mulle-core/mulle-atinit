@@ -4,7 +4,9 @@
 #include <stdio.h>
 
 
-MULLE_C_GLOBAL
+// CMAKE_WINDOWS_EXPORT_SYMBOLS should make this global
+// but i don't see anything happening
+//MULLE_C_GLOBAL
 void   z( void *s)
 {
    printf( "%s: \"%s\"\n", __FUNCTION__, (char *) s);
