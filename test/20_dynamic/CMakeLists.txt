@@ -8,15 +8,17 @@ message( STATUS "TEST_LIBRARIES=${TEST_LIBRARIES}")
 # for windows its important to hit the proper flags like
 # the libraries have been built with
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Zi -DEBUG -MDd -Od -wd4068")
-
+if( WIN32)
+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Zi -DEBUG -MDd -Od -wd4068")
+endif()
 
 add_executable( dynamic.exe
 main.c
 )
 
-set_target_properties( dynamic.exe PROPERTIES OUTPUT_NAME "dynamic")
-
+if( WIN32)
+   set_target_properties( dynamic.exe PROPERTIES OUTPUT_NAME "dynamic")
+endif()
 
 add_library( x SHARED
 x.c
@@ -56,10 +58,14 @@ ${TEST_LIBRARIES}
 
 else()
 
+# if we don't do --no-as-needed there will be no reason
+# to link the shared libraries
 target_link_libraries( dynamic.exe
+-Wl,--no-as-needed
 x
 y
 z
+-Wl,--as-needed
 ${TEST_LIBRARIES}
 )
 
