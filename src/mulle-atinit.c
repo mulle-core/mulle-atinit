@@ -4,6 +4,7 @@
 
 #include "mulle-atinit.h"
 #include <string.h>
+#include <stdarg.h>
 
 
 int   __MULLE_ATINIT_ranlib__;
@@ -58,7 +59,6 @@ static inline void    mulle_atinit_trace( char *format, ...)
 {
    va_list  args;
 
-#ifndef MULLE_TEST
    static int   trace = -1;
 
    if( ! trace)
@@ -67,7 +67,6 @@ static inline void    mulle_atinit_trace( char *format, ...)
    trace = getenv( "MULLE_ATINIT_FAILURE") != NULL;
    if( ! trace)
       return;
-#endif    
 
    va_start( args, format);
    vfprintf( stderr, format, args);
@@ -178,7 +177,7 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 // CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ? I don't understand...
 //
 MULLE_C_GLOBAL
-mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
+void   mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
 {
    _mulle_atinit( f, userinfo, priority);
 }
