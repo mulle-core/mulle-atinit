@@ -54,15 +54,34 @@ static void   init( void)
 }
 
 
+static inline void    mulle_atinit_trace( char *format, ...)
+{
+   va_list  args;
+
+#ifndef MULLE_TEST
+   static int   trace = -1;
+
+   if( ! trace)
+      return;
+
+   trace = getenv( "MULLE_ATINIT_FAILURE") != NULL;
+   if( ! trace)
+      return;
+#endif    
+
+   va_start( args, format);
+   vfprintf( stderr, format, args);
+   va_end( args);
+}
+
+
 static void   run_init_callbacks( void)
 {
    void   (*f)( void *);
    void   *userinfo;
    int    trace;
 
-   trace = getenv( "MULLE_ATINIT_DEBUG") != NULL;
-   if( trace)
-      fprintf( stderr, "mulle-atinit: Running callbacks\n");
+   mulle_atinit_trace( "mulle-atinit: Running callbacks\n");
 
    //
    // Use a stable sort for priorities that keeps insertion order on equality.
@@ -96,8 +115,7 @@ loop:
 
    if( f)
    {
-      if( trace)
-        fprintf( stderr, "mulle-atinit: call %p( %p)\n",
+       mulle_atinit_trace( "mulle-atinit: call %p( %p)\n",
                               (void *) f, userinfo);
 
       (*f)( userinfo);
@@ -107,17 +125,12 @@ loop:
    }
 }
 
-
 MULLE_C_NEVER_INLINE
 void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 {
-   int    trace;
-
    mulle_thread_once( &vars.once, init);
    if( ! f)
       return;
-
-   trace = getenv( "MULLE_ATINIT_DEBUG") != NULL;
 
    //
    // If everything ran already, we could only execute zero priority code
@@ -136,9 +149,8 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
                             "is late\n", (void *) f, priority);
 #endif
          mulle_thread_mutex_unlock( &vars.lock);
-         if( trace)
-           fprintf( stderr, "mulle-atinit: redirect %p( %p)\n",
-                     (void *) f, userinfo);
+         mulle_atinit_trace( "mulle-atinit: redirect %p( %p)\n",
+                                 (void *) f, userinfo);
          (*f)( userinfo);
          return;
       }
@@ -157,24 +169,28 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
    }
    mulle_thread_mutex_unlock( &vars.lock);
 
-   if( trace)
-     fprintf( stderr, "mulle-atinit: add %p( %p)\n", (void *) f, userinfo);
+   mulle_atinit_trace( "mulle-atinit: add %p( %p)\n", (void *) f, userinfo);
 }
 
 
+//
+// this is for windows. why is this still needed when doing 
+// CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ? I don't understand...
+//
+MULLE_C_GLOBAL
+mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
+{
+   _mulle_atinit( f, userinfo, priority);
+}
 //
 // this is supposed to be statically linked, not because of this initializer
 // (this could run in a shared lib too), but because of the availability of
 // the `mulle_atinit` symbol
 //
-MULLE_C_CONSTRUCTOR( load)
-static void   load( void)
+MULLE_C_CONSTRUCTOR( load_atinit)
+static void   load_atinit( void)
 {
-   int    trace;
-
-   trace = getenv( "MULLE_ATINIT_DEBUG") != NULL;
-   if( trace)
-     fprintf( stderr, "mulle-atinit: constructor\n");
+   mulle_atinit_trace( "mulle-atinit: constructor\n");
 
    _mulle_atinit( 0, 0, 0); // protect from evil linker optimization and do "once"
    run_init_callbacks();
