@@ -14,7 +14,7 @@ endif()
 #
 # Generated from sourcetree: A94E8C92-7299-4142-8A5C-2144E763D383;mulle-thread;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-thread no-link`
-# Disable for this platform: `mulle-sourcetree mark mulle-thread no-cmake-platform-windows`
+# Disable for this platform: `mulle-sourcetree mark mulle-thread no-cmake-platform-${MULLE_UNAME}`
 #
 if( NOT MULLE_THREAD_LIBRARY)
    find_library( MULLE_THREAD_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-thread${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-thread NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH)
@@ -85,7 +85,7 @@ endif()
 #
 # Generated from sourcetree: 59CB53C7-26AF-4465-8ED5-DDC19BC80FC8;mulle-dlfcn;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-dlfcn no-link`
-# Disable for this platform: `mulle-sourcetree mark mulle-dlfcn no-cmake-platform-windows`
+# Disable for this platform: `mulle-sourcetree mark mulle-dlfcn no-cmake-platform-${MULLE_UNAME}`
 #
 if( NOT MULLE_DLFCN_LIBRARY)
    find_library( MULLE_DLFCN_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-dlfcn${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-dlfcn NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH)
