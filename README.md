@@ -35,6 +35,13 @@ dependencies that use `mulle_atinit`. Dynamic linking with a missing `dlsym`
 won't work.
 
 
+
+### You are here
+
+![Overview](overview.dot.svg)
+
+
+
 ## Add
 
 Use [mulle-sde](//github.com/mulle-sde) to add mulle-atinit to your project:

@@ -1,3 +1,7 @@
+### 0.0.7
+
+* support for static linking with ``__MULLE_STATICALLY_LINKED__`` added
+
 ### 0.0.6
 
 * Various small improvements
