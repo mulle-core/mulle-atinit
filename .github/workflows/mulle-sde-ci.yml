@@ -43,6 +43,11 @@ jobs:
     - name: Mulle-SDE Craft
       run: mulle-sde craft --${BUILD_TYPE:-release}
 
-    - name: Mulle-SDE Test
+    - name: Mulle-SDE Test Debug
       run: |
-        [ ! -d test ] || mulle-sde test
+        mulle-sde test --debug
+
+    - name: Mulle-SDE Test Release
+      run: |
+        mulle-sde test clean all
+        mulle-sde test --release
