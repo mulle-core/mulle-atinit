@@ -16,16 +16,20 @@ libraries can stay dynamic or static as you choose.
 Ensure that global symbols are exported and that the whole library is linked
 to the executable and not optimized away by the linker.
 
+Platform | Linker Flags
+---------|--------------------------------------------------
+Linux    | `-Wl,--export-dynamic -Wl,--whole-archive -Wl,--no-as-needed`
+macos    | -force_load <library>
+
 Any participating shared library constructor uses
 
 ```
 mulle_atinit( f, userinfo, priority);
 ```
 
-to defer `atinit` to a later date. The function `f` will be called properly
+to defer `f` to a later date. The function `f` will be called properly
 sequenced before main. `userinfo` will be passed as the only parameter.
-Use priority 0 normally. Use higher priorities to move initializers ahead
-or postpone with lower priorities.
+You use priority 0 normally. Use higher priorities to move initializers ahead.
 
 ### Missing `dlsym`
 
