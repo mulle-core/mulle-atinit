@@ -7,7 +7,7 @@ sequenced (e.g. ELF bases shared library).
 
 | Release Version
 |-----------------------------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-c/mulle-atinit/actions)
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-core/mulle-atinit/actions)
 
 
 You must **statically** link this library with your executable. All other
