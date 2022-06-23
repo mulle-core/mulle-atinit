@@ -1,3 +1,8 @@
+### 0.0.8
+
+* change GLOBALs for Windows
+* fix wrong return type of `mulle_atinit_trace_bummer`
+
 ### 0.0.7
 
 * support for static linking with ``__MULLE_STATICALLY_LINKED__`` added
