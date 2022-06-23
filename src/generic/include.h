@@ -28,8 +28,14 @@
  */
 #include "_mulle-atinit-include.h"
 
-#ifndef MULLE_ATINIT_EXTERN_GLOBAL
-# define MULLE_ATINIT_EXTERN_GLOBAL MULLE_C_EXTERN_GLOBAL
+#ifdef MULLE_ATINIT_BUILD
+# define MULLE_ATINIT_GLOBAL    MULLE_C_GLOBAL
+#else
+# if defined( MULLE_ATINIT_INCLUDE_DYNAMIC) || (defined( MULLE_INCLUDE_DYNAMIC) && ! defined( MULLE_ATINIT_INCLUDE_STATIC))
+#  define MULLE_ATINIT_GLOBAL   MULLE_C_EXTERN_GLOBAL
+# else
+#  define MULLE_ATINIT_GLOBAL   extern
+# endif
 #endif
 /* You can add some more include statements here */
 

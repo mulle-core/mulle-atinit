@@ -176,7 +176,6 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 // this is for windows. why is this still needed when doing 
 // CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ? I don't understand...
 //
-MULLE_C_GLOBAL
 void   mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
 {
    _mulle_atinit( f, userinfo, priority);
