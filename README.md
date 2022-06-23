@@ -9,16 +9,13 @@ sequenced (e.g. ELF bases shared library).
 |-----------------------------------
 | ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-core/mulle-atinit/actions)
 
-
-You must **statically** link this library with your executable. All other
-libraries can stay dynamic or static as you choose.
-
+You must **statically** link the mulle-atinit library with your executable.
 Ensure that global symbols are exported and that the whole library is linked
 to the executable and not optimized away by the linker.
 
 Platform | Linker Flags
 ---------|--------------------------------------------------
-Linux    | `-Wl,--export-dynamic -Wl,--whole-archive -Wl,--no-as-needed`
+Linux    | `-Wl,--export-dynamic -Wl,--whole-archive`
 macos    | -force_load <library>
 
 Any participating shared library constructor uses
@@ -39,11 +36,9 @@ dependencies that use `mulle_atinit`. Dynamic linking with a missing `dlsym`
 won't work.
 
 
-
 ### You are here
 
 ![Overview](overview.dot.svg)
-
 
 
 ## Add
