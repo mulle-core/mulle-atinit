@@ -7,7 +7,7 @@ sequenced (e.g. ELF bases shared library).
 
 | Release Version
 |-----------------------------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](https://github.com/mulle-core/mulle-atinit/actions)
+| ![Mulle kybernetiK tag](//img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](//github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](//github.com/mulle-core/mulle-atinit/actions)
 
 You must **statically** link the mulle-atinit library with your executable.
 Ensure that global symbols are exported and that the whole library is linked
@@ -61,7 +61,7 @@ Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-atinit and al
 
 ```
 mulle-sde install --prefix /usr/local \
-   https://github.com/mulle-core/mulle-atinit/archive/latest.tar.gz
+   //github.com/mulle-core/mulle-atinit/archive/latest.tar.gz
 ```
 
 ### Manual Installation
