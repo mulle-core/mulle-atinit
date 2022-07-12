@@ -20,7 +20,7 @@ macos    | -force_load <library>
 
 Any participating shared library constructor uses
 
-```
+``` c
 mulle_atinit( f, userinfo, priority);
 ```
 
@@ -45,7 +45,7 @@ won't work.
 
 Use [mulle-sde](//github.com/mulle-sde) to add mulle-atinit to your project:
 
-```
+``` sh
 mulle-sde dependency add --c \
                          --github mulle-core \
                          --marks no-dynamic-link,no-intermediate-link,no-singlephase,all-load \
@@ -59,7 +59,7 @@ mulle-sde dependency add --c \
 
 Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-atinit and all dependencies:
 
-```
+``` sh
 mulle-sde install --prefix /usr/local \
    //github.com/mulle-core/mulle-atinit/archive/latest.tar.gz
 ```
@@ -77,7 +77,7 @@ Requirements                                               | Description
 
 Install into `/usr/local`:
 
-```
+``` sh
 mkdir build 2> /dev/null
 (
    cd build ;
