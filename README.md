@@ -3,7 +3,7 @@
 #### 🤱🏼 Compatibility library for deterministic initializers
 
 This is a workaround for dynamic libraries initializers not being properly
-sequenced (e.g. ELF bases shared library).
+sequenced (e.g. an ELF shared library).
 
 | Release Version
 |-----------------------------------
@@ -16,7 +16,7 @@ to the executable and not optimized away by the linker.
 Platform | Linker Flags
 ---------|--------------------------------------------------
 Linux    | `-Wl,--export-dynamic -Wl,--whole-archive`
-macos    | -force_load <library>
+macos    | `-force_load <library>`
 
 Any participating shared library constructor uses
 

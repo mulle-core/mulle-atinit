@@ -7,6 +7,8 @@
 #include <stdarg.h>
 
 
+//#define MULLE_ATINIT_DEBUG
+
 int   __MULLE_ATINIT_ranlib__;
 
 
@@ -50,6 +52,9 @@ static struct
 
 static void   init( void)
 {
+#ifdef MULLE_ATINIT_DEBUG
+   fprintf( stderr , "_mulle_atinit inits mutex\n");
+#endif
    assert( MULLE_THREAD_ONCE_INIT == 0);
    mulle_thread_mutex_init( &vars.lock);
 }
@@ -78,7 +83,6 @@ static void   run_init_callbacks( void)
 {
    void   (*f)( void *);
    void   *userinfo;
-   int    trace;
 
    mulle_atinit_trace( "mulle-atinit: Running callbacks\n");
 
@@ -124,9 +128,13 @@ loop:
    }
 }
 
+
 MULLE_C_NEVER_INLINE
 void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 {
+#ifdef MULLE_ATINIT_DEBUG
+   fprintf( stderr , "_mulle_atinit %p( %p) starts\n", (void *) f, userinfo);
+#endif
    mulle_thread_once( &vars.once, init);
    if( ! f)
       return;
@@ -145,7 +153,7 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
 #ifdef DEBUG
          if( priority)
             fprintf( stderr, "late _mulle_atinit call %p with priority %d "
-                            "is late\n", (void *) f, priority);
+                             "is late\n", (void *) f, priority);
 #endif
          mulle_thread_mutex_unlock( &vars.lock);
          mulle_atinit_trace( "mulle-atinit: redirect %p( %p)\n",
@@ -180,6 +188,7 @@ void   mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
 {
    _mulle_atinit( f, userinfo, priority);
 }
+
 //
 // this is supposed to be statically linked, not because of this initializer
 // (this could run in a shared lib too), but because of the availability of
