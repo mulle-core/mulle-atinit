@@ -4,6 +4,10 @@ project( dynamic.exe C)
 
 message( STATUS "TEST_LIBRARIES=${TEST_LIBRARIES}")
 
+if( NOT TEST_LIBRARIES)
+   message( FATAL_ERROR "TEST_LIBRARIES is empty")
+endif()
+
 #
 # for windows its important to hit the proper flags like
 # the libraries have been built with
@@ -29,7 +33,7 @@ y.c
 )
 
 # this works
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set( CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # supposedly useful sometimes
 # set( CMAKE_SUPPORT_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
