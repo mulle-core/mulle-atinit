@@ -16,25 +16,25 @@
 
 // You can tweak the following #include with these commands.
 // (Use A94E8C92-7299-4142-8A5C-2144E763D383 instead of mulle-thread if there are duplicate entries)
-//    remove:             `mulle-sde dependency mark mulle-thread no-header`
-//    rename:             `mulle-sde dependency|library set mulle-thread include whatever.h`
-//    reorder:            `mulle-sde dependency move mulle-thread <up|down>`
+//    remove #include:: `mulle-sde dependency mark mulle-thread no-header`
+//    rename:              `mulle-sde dependency|library set mulle-thread include whatever.h`
+//    reorder:             `mulle-sde dependency move mulle-thread <up|down>`
 //    toggle #include:    `mulle-sde dependency mark mulle-thread [no-]import`
-//    toggle public:      `mulle-sde dependency mark mulle-thread [no-]public`
-//    toggle optional:    `mulle-sde dependency mark mulle-thread [no-]require`
-//    remove for platform:`mulle-sde dependency mark mulle-thread no-platform-<uname>`
+//    toggle public:       `mulle-sde dependency mark mulle-thread [no-]public`
+//    toggle optional:     `mulle-sde dependency mark mulle-thread [no-]require`
+//    remove for platform: `mulle-sde dependency mark mulle-thread no-platform-<uname>`
 //        (use `mulle-sourcetree-to-c --unames` to list known values)
 #include <mulle-thread/mulle-thread.h>   // mulle-thread
 
 // You can tweak the following #include with these commands.
 // (Use 59CB53C7-26AF-4465-8ED5-DDC19BC80FC8 instead of mulle-dlfcn if there are duplicate entries)
-//    remove:             `mulle-sde dependency mark mulle-dlfcn no-header`
-//    rename:             `mulle-sde dependency|library set mulle-dlfcn include whatever.h`
-//    reorder:            `mulle-sde dependency move mulle-dlfcn <up|down>`
+//    remove #include:: `mulle-sde dependency mark mulle-dlfcn no-header`
+//    rename:              `mulle-sde dependency|library set mulle-dlfcn include whatever.h`
+//    reorder:             `mulle-sde dependency move mulle-dlfcn <up|down>`
 //    toggle #include:    `mulle-sde dependency mark mulle-dlfcn [no-]import`
-//    toggle public:      `mulle-sde dependency mark mulle-dlfcn [no-]public`
-//    toggle optional:    `mulle-sde dependency mark mulle-dlfcn [no-]require`
-//    remove for platform:`mulle-sde dependency mark mulle-dlfcn no-platform-<uname>`
+//    toggle public:       `mulle-sde dependency mark mulle-dlfcn [no-]public`
+//    toggle optional:     `mulle-sde dependency mark mulle-dlfcn [no-]require`
+//    remove for platform: `mulle-sde dependency mark mulle-dlfcn no-platform-<uname>`
 //        (use `mulle-sourcetree-to-c --unames` to list known values)
 #include <mulle-dlfcn/mulle-dlfcn.h>   // mulle-dlfcn
 

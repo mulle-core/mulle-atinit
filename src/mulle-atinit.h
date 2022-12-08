@@ -43,7 +43,7 @@
 #include <stdint.h>
 
 
-#define MULLE_ATINIT_VERSION  ((0 << 20) | (0 << 8) | 8)
+#define MULLE_ATINIT_VERSION  ((0 << 20) | (0 << 8) | 9)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
@@ -97,11 +97,15 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority);
 
 static inline void    mulle_atinit_trace_bummer( void)
 {
-   char   *s;
+   static char   printed_once;
+   char          *s;
 
    s = getenv( "MULLE_ATINIT_FAILURE");
-   if( ! s || *s > '0')
+   if( (! s || *s > '0') && ! printed_once)
+   {
       fprintf( stderr, "_mulle_atinit is not available yet, bummer\n");
+      printed_once = 1;
+   }
 #ifndef MULLE_TEST
    if( s && *s > '1')
 #endif      
