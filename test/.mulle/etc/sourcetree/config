@@ -1,1 +1,1 @@
-mulle-atinit;${MULLE__ATINIT_NODETYPE:-tar};no-dynamic-link,no-import,no-intermediate-link;efd25fa9-df17-44b2-b35e-4edc4ef68e56;${MULLE_ATINIT_URL:-https://github.com/mulle-core/mulle-atinit/archive/${MULLE_TAG}.tar.gz};${MULLE__ATINIT_BRANCH};${MULLE__ATINIT_TAG:-latest};;
+mulle-atinit;${MULLE__ATINIT_NODETYPE:-tar};no-dynamic-link,no-import,no-intermediate-link;efd25fa9-df17-44b2-b35e-4edc4ef68e56;${MULLE__ATINIT_URL:-https://github.com/mulle-core/mulle-atinit/archive/${MULLE_TAG}.tar.gz};${MULLE__ATINIT_BRANCH};${MULLE__ATINIT_TAG:-latest};;
