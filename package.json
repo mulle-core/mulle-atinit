@@ -1,6 +1,6 @@
 {
    "name" : "mulle-atinit",
-   "version" : "0.0.5",
+   "version" : "0.0.9",
    "description" : "🤱🏼 Compatibility library for deterministic initializers",
    "homepage" : "https://github.com/mulle-core/mulle-atinit",
    "bugs" : "https://github.com/mulle-core/mulle-atinit/issues",
@@ -11,7 +11,10 @@
       "url" : "mulle-core/mulle-atinit"
    },
    "dependencies" : {
-      "mulle-thread" : "mulle-concurrent/mulle-thread",
-      "mulle-dlfcn" : "mulle-core/mulle-dlfcn"
+      "mulle-thread" : "git://github.com/mulle-concurrent/mulle-thread",
+      "mulle-c11" : "git://github.com/mulle-c/mulle-c11",
+      "mintomic" : "git://github.com/mulle-concurrent/mintomic",
+      "mulle-dlfcn" : "git://github.com/mulle-core/mulle-dlfcn",
+      "dlfcn-win32" : "git://github.com/mulle-core/dlfcn-win32"
    }
 }
