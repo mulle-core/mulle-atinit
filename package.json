@@ -8,7 +8,7 @@
    "license" : "UNLICENSED",
    "repository" : {
       "type" : "git",
-      "url" : "mulle-core/mulle-atinit"
+      "url" : "github:mulle-core/mulle-atinit"
    },
    "dependencies" : {
       "mulle-thread" : "git://github.com/mulle-concurrent/mulle-thread",
