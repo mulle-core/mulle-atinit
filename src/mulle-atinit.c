@@ -60,16 +60,18 @@ static void   init( void)
 }
 
 
-static inline void    mulle_atinit_trace( char *format, ...)
+static void    mulle_atinit_trace( char *format, ...)
 {
    va_list  args;
+   char     *s;
 
    static int   trace = -1;
 
-   if( ! trace)
-      return;
-
-   trace = getenv( "MULLE_ATINIT_FAILURE") != NULL;
+   if( trace == -1)
+   {
+      s     = getenv( "MULLE_ATINIT_FAILURE");
+      trace = s && *s != '0' && *s != 'N';
+   }
    if( ! trace)
       return;
 

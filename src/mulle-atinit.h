@@ -106,10 +106,12 @@ static inline void    mulle_atinit_trace_bummer( void)
       fprintf( stderr, "_mulle_atinit is not available yet, bummer\n");
       printed_once = 1;
    }
-#ifndef MULLE_TEST
+
    if( s && *s > '1')
-#endif      
+   {
+      fprintf( stderr, "_mulle_atinit aborts\n");
       abort();
+   }
 }
 
 
