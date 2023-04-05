@@ -1,0 +1,21 @@
+{
+   "name" : "mulle-atinit",
+   "version" : "0.0.9",
+   "description" : "Compatibility library for deterministic initializers",
+   "keywords" : [],
+   "license" : "UNLICENSED",
+   "repo" : "mulle-core/mulle-atinit",
+   "src" : [
+      "src/generic/include-private.h",
+      "src/generic/include.h",
+      "src/mulle-atinit.c",
+      "src/mulle-atinit.h",
+      "src/reflect/_mulle-atinit-include-private.h",
+      "src/reflect/_mulle-atinit-include.h",
+      "src/reflect/_mulle-atinit-versioncheck.h"
+   ],
+   "dependencies" : {
+      "mulle-concurrent/mulle-thread": "*",
+      "mulle-core/mulle-dlfcn": "*"
+   }
+}
