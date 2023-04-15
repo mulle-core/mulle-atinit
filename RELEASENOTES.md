@@ -1,3 +1,7 @@
+### 0.0.10
+
+* remove package.json as it conflicts with clib.json
+
 ### 0.0.9
 
 * Various small improvements
