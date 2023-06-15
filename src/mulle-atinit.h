@@ -43,27 +43,27 @@
 #include <stdint.h>
 
 
-#define MULLE_ATINIT_VERSION  ((0 << 20) | (0 << 8) | 10)
+#define MULLE__ATINIT_VERSION  ((0 << 20) | (0 << 8) | 10)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
 {
-   return( MULLE_ATINIT_VERSION >> 20);
+   return( MULLE__ATINIT_VERSION >> 20);
 }
 
 
 static inline unsigned int   mulle_atinit_get_version_minor( void)
 {
-   return( (MULLE_ATINIT_VERSION >> 8) & 0xFFF);
+   return( (MULLE__ATINIT_VERSION >> 8) & 0xFFF);
 }
 
 
 static inline unsigned int   mulle_atinit_get_version_patch( void)
 {
-   return( MULLE_ATINIT_VERSION & 0xFF);
+   return( MULLE__ATINIT_VERSION & 0xFF);
 }
 
-MULLE_ATINIT_GLOBAL
+MULLE__ATINIT_GLOBAL
 uint32_t   mulle_atinit_get_version( void);
 
 
@@ -92,7 +92,7 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 //    mulle_atinit( f, NULL, priority);
 // }
 //
-MULLE_ATINIT_GLOBAL
+MULLE__ATINIT_GLOBAL
 void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority);
 
 static inline void    mulle_atinit_trace_bummer( void)
