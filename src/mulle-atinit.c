@@ -14,7 +14,7 @@ int   __MULLE_ATINIT_ranlib__;
 
 uint32_t   mulle_atinit_get_version( void)
 {
-   return( MULLE_ATINIT_VERSION);
+   return( MULLE__ATINIT_VERSION);
 }
 
 
