@@ -15,6 +15,6 @@ void   y( void *s)
 MULLE_C_CONSTRUCTOR( load)
 static void   load( void)
 {
-   mulle_atinit( y, "last", -2); // last
+   mulle_atinit( y, "last", -2, NULL); // last
 }
 

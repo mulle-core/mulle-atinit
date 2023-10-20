@@ -17,6 +17,6 @@ void   z( void *s)
 MULLE_C_CONSTRUCTOR( load)
 static void   load( void)
 {
-   mulle_atinit( z, "mid", -1);  // mid
+   mulle_atinit( z, "mid", -1, NULL);  // mid
 }
 

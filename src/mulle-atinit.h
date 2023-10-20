@@ -43,7 +43,7 @@
 #include <stdint.h>
 
 
-#define MULLE__ATINIT_VERSION  ((0 << 20) | (0 << 8) | 10)
+#define MULLE__ATINIT_VERSION  ((0 << 20) | (0 << 8) | 11)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
@@ -67,13 +67,13 @@ MULLE__ATINIT_GLOBAL
 uint32_t   mulle_atinit_get_version( void);
 
 
-//
+
 // we don't need it on __APPLE_ as the __attribute__((constructor)) order is
 // correct. On windows it seems hopeless, so we just give up.
 //
-#if defined( __APPLE__) 
+#if 0 // defined( __APPLE__) // Seems we also need it on __APPLE__ now...
 
-static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
+static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment)
 {
    (*f)( userinfo);
 }
@@ -89,21 +89,22 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 // __attribute__((constructor))
 // static void load( void)
 // {
-//    mulle_atinit( f, NULL, priority);
+//    mulle_atinit( f, NULL, priority, NULL);
 // }
 //
 MULLE__ATINIT_GLOBAL
-void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority);
+void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment);
 
-static inline void    mulle_atinit_trace_bummer( void)
+static inline void    mulle_atinit_trace_bummer( char *comment)
 {
    static char   printed_once;
    char          *s;
 
+   comment = comment ? comment : "???";
    s = getenv( "MULLE_ATINIT_FAILURE");
    if( (! s || *s > '0') && ! printed_once)
    {
-      fprintf( stderr, "_mulle_atinit is not available yet, bummer\n");
+      fprintf( stderr, "_mulle_atinit is not available yet for %s bummer\n", comment);
       printed_once = 1;
    }
 
@@ -115,31 +116,49 @@ static inline void    mulle_atinit_trace_bummer( void)
 }
 
 
-static inline void   mulle_atinit_fail( void (*f)( void *), void *userinfo)
+static inline void   mulle_atinit_fail( void (*f)( void *),
+                                        void *userinfo,
+                                        char *comment)
 {
+   char   buf[ 32];
+
+   if( ! comment)
+   {
+      snprintf( buf, sizeof( buf), "%p", userinfo);
+      buf[ sizeof( buf) - 1] = 0;
+      comment = buf;
+   }
    //
    // If not available, warn and execute anyway and hope for the best.
    // Many mulle-testallocator tests are in C and they don't care.
    //
-   mulle_atinit_trace_bummer();
+   mulle_atinit_trace_bummer( comment);
    (*f)( userinfo);
 }
 
 
-static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority)
+static inline void   mulle_atinit( void (*f)( void *),
+                                   void *userinfo,
+                                   int priority,
+                                   char *comment)
 {
 #ifdef __MULLE_STATICALLY_LINKED__
    _mulle_atinit( f, userinfo, priority);
 #else
-   void   (*p_mulle_atinit)( void (*f)( void *), void *, int);
+   void   (*p_mulle_atinit)( void (*f)( void *), void *, int, char *);
 
+// MEMO: (nat) dubious now, used to be sensible :D
+#ifdef __WIN32
    p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "mulle_atinit_dlsym");
+#else
+   p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "_mulle_atinit");
+#endif
    if( ! p_mulle_atinit)
    {
-      mulle_atinit_fail( f, userinfo);
+      mulle_atinit_fail( f, userinfo, comment);
       return;
    }
-   (*p_mulle_atinit)( f, userinfo, priority);
+   (*p_mulle_atinit)( f, userinfo, priority, comment);
 #endif
 }
 #endif
