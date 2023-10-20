@@ -19,17 +19,18 @@ uint32_t   mulle_atinit_get_version( void)
 
 
 //
-// this piece is supposed to be embeded in the startup library
+// this piece is supposed to be embedded in the startup library
 //
 struct prioritized_callback
 {
    int    priority;
    void   (*f)( void *);
    void   *userinfo;
+   char   *comment;
 };
 
 
-static int mulle_mergesort(void *, size_t, size_t, int (*)(const void *, const void *));
+static int mulle_mergesort( void *, size_t, size_t, int (*)(const void *, const void *));
 
 
 
@@ -85,6 +86,7 @@ static void   run_init_callbacks( void)
 {
    void   (*f)( void *);
    void   *userinfo;
+   char   *comment;
 
    mulle_atinit_trace( "mulle-atinit: Running callbacks\n");
 
@@ -106,22 +108,23 @@ loop:
          --vars.n;
          f        = vars.calls[ vars.n].f;
          userinfo = vars.calls[ vars.n].userinfo;
+         comment  = vars.calls[ vars.n].comment;
       }
 
       if( ! f)
       {
          free( vars.calls);
-         vars.calls = NULL;  // keep size alive though as an indicator that we ran
-         vars.size  = -1;
-         vars.n     = 0;
+         vars.calls   = NULL;  // keep size alive though as an indicator that we ran
+         vars.size    = -1;
+         vars.n       = 0;
       }
    }
    mulle_thread_mutex_unlock( &vars.lock);
 
    if( f)
    {
-       mulle_atinit_trace( "mulle-atinit: call %p( %p)\n",
-                              (void *) f, userinfo);
+       mulle_atinit_trace( "mulle-atinit: call %p( %p) %s\n",
+                              (void *) f, userinfo, comment ? comment : "");
 
       (*f)( userinfo);
 
@@ -132,10 +135,10 @@ loop:
 
 
 MULLE_C_NEVER_INLINE
-void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
+void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment)
 {
 #ifdef MULLE_ATINIT_DEBUG
-   fprintf( stderr , "_mulle_atinit %p( %p) starts\n", (void *) f, userinfo);
+   fprintf( stderr , "_mulle_atinit %p( %p) %s starts\n", (void *) f, userinfo, comment ? comment : "");
 #endif
    mulle_thread_once( &vars.once, init);
    if( ! f)
@@ -158,8 +161,8 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
                              "is late\n", (void *) f, priority);
 #endif
          mulle_thread_mutex_unlock( &vars.lock);
-         mulle_atinit_trace( "mulle-atinit: redirect %p( %p)\n",
-                                 (void *) f, userinfo);
+         mulle_atinit_trace( "mulle-atinit: redirect %p( %p) %s\n",
+                                 (void *) f, userinfo, comment ? comment : "");
          (*f)( userinfo);
          return;
       }
@@ -174,21 +177,26 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority)
       vars.calls[ vars.n].priority = priority;
       vars.calls[ vars.n].f        = f;
       vars.calls[ vars.n].userinfo = userinfo;
+      vars.calls[ vars.n].comment  = comment;
       vars.n++;
    }
    mulle_thread_mutex_unlock( &vars.lock);
 
-   mulle_atinit_trace( "mulle-atinit: add %p( %p)\n", (void *) f, userinfo);
+   mulle_atinit_trace( "mulle-atinit: add %p( %p) %s\n",
+                              (void *) f, userinfo, comment ? comment : "");
 }
 
 
 //
-// this is for windows. why is this still needed when doing 
+// This is for windows (?). Why is this still needed when doing
 // CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ? I don't understand...
 //
-void   mulle_atinit_dlsym( void (*f)( void *), void *userinfo, int priority)
+void   mulle_atinit_dlsym( void (*f)( void *),
+                           void *userinfo,
+                           int priority,
+                           char *comment)
 {
-   _mulle_atinit( f, userinfo, priority);
+   _mulle_atinit( f, userinfo, priority, comment);
 }
 
 //
@@ -201,7 +209,7 @@ static void   load_atinit( void)
 {
    mulle_atinit_trace( "mulle-atinit: constructor\n");
 
-   _mulle_atinit( 0, 0, 0); // protect from evil linker optimization and do "once"
+   _mulle_atinit( 0, 0, 0, NULL); // protect from evil linker optimization and do "once"
    run_init_callbacks();
 }
 

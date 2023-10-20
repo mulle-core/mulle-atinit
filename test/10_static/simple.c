@@ -25,9 +25,9 @@ static void   c( void *s)
 
 int  main( void)
 {
-   mulle_atinit( a, "first", 0);
-   mulle_atinit( b, "mid", 0);
-   mulle_atinit( c, "last", 0);
+   mulle_atinit( a, "first", 0, NULL);
+   mulle_atinit( b, "mid", 0, NULL);
+   mulle_atinit( c, "last", 0, NULL);
 
    return( 0);
 }
