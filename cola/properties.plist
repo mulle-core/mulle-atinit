@@ -7,7 +7,7 @@
       user="mulle-core";
       repo="mulle-atinit";
       homepage="https://github.com/mulle-core/mulle-atinit";
-      license="UNLICENSED"
+      license="BSD-3-Clause"
    };
    dependencies =
    (
