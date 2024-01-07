@@ -6,9 +6,11 @@ This is a workaround for dynamic libraries initializers not being properly
 sequenced (e.g. an ELF shared library).
 
 
+
+
 | Release Version                                       | Release Notes
 |-------------------------------------------------------|--------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](//github.com/mulle-core/mulle-atinit/actions)| [RELEASENOTES](RELEASENOTES.md) |
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg?branch=release) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg?branch=release)](//github.com/mulle-core/mulle-atinit/actions) | [RELEASENOTES](RELEASENOTES.md) |
 
 
 
@@ -42,6 +44,12 @@ If you are linking your executable statically and `dlsym` is not available
 dependencies that use `mulle_atinit`. Dynamic linking with a missing `dlsym`
 won't work.
 
+
+
+
+### You are here
+
+![Overview](overview.dot.svg)
 
 
 
@@ -99,8 +107,10 @@ cmake --build build --config Release &&
 cmake --install build --config Release
 ```
 
+
 ## Author
 
-[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK
+[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK  
+
 
 
