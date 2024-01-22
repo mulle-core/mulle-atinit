@@ -43,7 +43,7 @@
 #include <stdint.h>
 
 
-#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 11)
+#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 12)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
@@ -143,7 +143,7 @@ static inline void   mulle_atinit( void (*f)( void *),
                                    char *comment)
 {
 #ifdef __MULLE_STATICALLY_LINKED__
-   _mulle_atinit( f, userinfo, priority);
+   _mulle_atinit( f, userinfo, priority, comment);
 #else
    void   (*p_mulle_atinit)( void (*f)( void *), void *, int, char *);
 
