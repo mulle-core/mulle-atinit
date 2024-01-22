@@ -1,3 +1,7 @@
+### 0.0.12
+
+* compile fix for musl/cosmopolitan
+
 ### 0.0.11
 
 * Various small improvements
