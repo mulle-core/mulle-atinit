@@ -43,7 +43,7 @@
 #include <stdint.h>
 
 
-#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 12)
+#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 13)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
@@ -86,7 +86,7 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 //
 // this is called by a `__attribute__((constructor))`
 //
-// __attribute__((constructor))
+// MULLE_C_CONSTRUCTOR( load)
 // static void load( void)
 // {
 //    mulle_atinit( f, NULL, priority, NULL);
