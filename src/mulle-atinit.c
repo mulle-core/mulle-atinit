@@ -56,7 +56,7 @@ static void   init( void)
 #ifdef MULLE_ATINIT_DEBUG
    fprintf( stderr , "_mulle_atinit inits mutex\n");
 #endif
-   assert( MULLE_THREAD_ONCE_INIT == 0);
+   assert( MULLE_THREAD_ONCE_DATA == 0);
    mulle_thread_mutex_init( &vars.lock);
 }
 
