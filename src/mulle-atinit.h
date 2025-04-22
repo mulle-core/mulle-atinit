@@ -43,7 +43,7 @@
 #include <stdint.h>
 
 
-#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 13)
+#define MULLE__ATINIT_VERSION  ((0UL << 20) | (0 << 8) | 14)
 
 
 static inline unsigned int   mulle_atinit_get_version_major( void)
