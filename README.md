@@ -8,9 +8,9 @@ sequenced (e.g. an ELF shared library).
 
 
 
-| Release Version                                       | Release Notes
-|-------------------------------------------------------|--------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg)](//github.com/mulle-core/mulle-atinit/actions) | [RELEASENOTES](RELEASENOTES.md) |
+| Release Version                                       | Release Notes  | AI Documentation
+|-------------------------------------------------------|----------------|---------------
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-core/mulle-atinit.svg) [![Build Status](https://github.com/mulle-core/mulle-atinit/workflows/CI/badge.svg)](//github.com/mulle-core/mulle-atinit/actions) | [RELEASENOTES](RELEASENOTES.md) | [DeepWiki for mulle-atinit](https://deepwiki.com/mulle-core/mulle-atinit)
 
 
 
