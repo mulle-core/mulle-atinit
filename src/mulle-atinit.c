@@ -94,16 +94,19 @@ static void mergesort_internal(struct prioritized_callback *arr,
 }
 
 
-static void _prioritized_callback_mergesort(struct prioritized_callback *arr, size_t size)
+static void _prioritized_callback_mergesort( struct prioritized_callback *array, size_t size)
 {
+   struct prioritized_callback   *tmp;
+
    if( size <= 1)
      return;
 
-   // Allocate temporary array (for very small allocations)
-   mulle_alloca_do(temp, struct prioritized_callback, size)
-   {
-      mergesort_internal(arr, temp, 0, size - 1);
-   }
+   // can't have mulle_malloc here or mulle_alloca
+   tmp = malloc( sizeof( struct prioritized_callback) * size);
+   if( ! tmp)
+      abort();
+   mergesort_internal( array, tmp, 0, size - 1);
+   free( tmp);
 }
 
 
