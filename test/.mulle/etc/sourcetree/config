@@ -1,1 +1,2 @@
 mulle-atinit;${MULLE__ATINIT_NODETYPE:-tar};no-dynamic-link,no-import,no-intermediate-link;efd25fa9-df17-44b2-b35e-4edc4ef68e56;${MULLE__ATINIT_URL:-https://github.com/mulle-core/mulle-atinit/archive/${MULLE_TAG}.tar.gz};${MULLE__ATINIT_BRANCH};${MULLE__ATINIT_TAG:-latest};;
+mulle-allocator;${MULLE__ALLOCATOR_NODETYPE:-tar};no-all-load,no-cmake-loader,no-cmake-searchpath,no-import;91A39742-7A4A-415E-8EF7-7CC4841B95B2;${MULLE__ALLOCATOR_URL:-https://github.com/mulle-c/mulle-allocator/archive/${MULLE_TAG}.tar.gz};${MULLE__ALLOCATOR_BRANCH};${MULLE__ALLOCATOR_TAG:-latest};;

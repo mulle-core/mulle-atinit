@@ -15,6 +15,21 @@
 #define _mulle_atinit_include_h__
 
 // To remove the following dependency (headers and library) completely:
+//   `mulle-sde dependency remove mulle-allocator`
+// (Use 776DB670-AE54-491E-85DA-93A94B8C978A instead of mulle-allocator, if there are duplicate entries)
+//
+// You can tweak the following #include with these commands:
+//    remove #include: `mulle-sde dependency mark mulle-allocator no-header`
+//    rename              : `mulle-sde dependency|library set mulle-allocator include whatever.h`
+//    reorder             : `mulle-sde dependency move mulle-allocator <up|down>`
+//    toggle #include: `mulle-sde dependency mark mulle-allocator [no-]import`
+//    toggle public       : `mulle-sde dependency mark mulle-allocator [no-]public`
+//    toggle optional     : `mulle-sde dependency mark mulle-allocator [no-]require`
+//    remove for platform : `mulle-sde dependency mark mulle-allocator no-platform-<uname>`
+//        (use `mulle-sourcetree-to-c --unames` to list known values)
+#include <mulle-allocator/mulle-allocator.h>   // mulle-allocator
+
+// To remove the following dependency (headers and library) completely:
 //   `mulle-sde dependency remove mulle-thread`
 // (Use A94E8C92-7299-4142-8A5C-2144E763D383 instead of mulle-thread, if there are duplicate entries)
 //
