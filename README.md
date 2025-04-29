@@ -85,21 +85,35 @@ mulle-sde install --prefix /usr/local \
 
 ### Legacy Installation
 
-Install the requirements:
+#### Requirements
+
+Preferably install mulle-core and be done with it:
+
+| Requirements                                     | Description
+|--------------------------------------------------|-----------------------
+| [mulle-core](//github.com/mulle-core/mulle-core) |🌋 Almagamated library of mulle-core + mulle-concurrent + mulle-c
+
+
+Or if you really want to do it exhaustively:
 
 | Requirements                                 | Description
 |----------------------------------------------|-----------------------
 | [mulle-thread](https://github.com/mulle-concurrent/mulle-thread)             | 🔠 Cross-platform thread/mutex/tss/atomic operations in C
 | [mulle-dlfcn](https://github.com/mulle-core/mulle-dlfcn)             | ♿️ Shared library helper
 
+#### Download
+
 Download the latest [tar](https://github.com/mulle-core/mulle-atinit/archive/refs/tags/latest.tar.gz) or [zip](https://github.com/mulle-core/mulle-atinit/archive/refs/tags/latest.zip) archive and unpack it.
+
+#### Install
 
 Install **mulle-atinit** into `/usr/local` with [cmake](https://cmake.org):
 
 ``` sh
+export MULLE_SDK_PATH="/usr/local"
 cmake -B build \
-      -DCMAKE_INSTALL_PREFIX=/usr/local \
-      -DCMAKE_PREFIX_PATH=/usr/local \
+      -DCMAKE_INSTALL_PREFIX="${MULLE_SDK_PATH}" \
+      -DCMAKE_PREFIX_PATH="${MULLE_SDK_PATH}" \
       -DCMAKE_BUILD_TYPE=Release &&
 cmake --build build --config Release &&
 cmake --install build --config Release
