@@ -1,3 +1,8 @@
+## 0.1.0
+
+* renamed `MULLE_ATINIT_FAILURE` environment variable to `MULLE_ATINIT_TRACE`
+
+
 ### 0.0.14
 
 Various small improvements

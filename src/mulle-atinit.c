@@ -139,7 +139,7 @@ static void    mulle_atinit_trace( char *format, ...)
 
    if( trace == -1)
    {
-      s     = getenv( "MULLE_ATINIT_FAILURE");
+      s     = getenv( "MULLE_ATINIT_TRACE");
       trace = s && *s != '0' && *s != 'N';
    }
    if( ! trace)
@@ -290,7 +290,9 @@ void   mulle_atinit_dlsym( void (*f)( void *),
 //
 // this is supposed to be statically linked, not because of this initializer
 // (this could run in a shared lib too), but because of the availability of
-// the `mulle_atinit` symbol
+// the `mulle_atinit` symbol. As this is statically linked it will be in the
+// same "load" domain, as main() whereas shared libraries should have piled
+// up by now.
 //
 MULLE_C_CONSTRUCTOR( load_atinit)
 static void   load_atinit( void)
