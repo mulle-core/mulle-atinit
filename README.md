@@ -101,19 +101,18 @@ Or if you really want to do it exhaustively:
 | [mulle-thread](https://github.com/mulle-concurrent/mulle-thread)             | 🔠 Cross-platform thread/mutex/tss/atomic operations in C
 | [mulle-dlfcn](https://github.com/mulle-core/mulle-dlfcn)             | ♿️ Shared library helper
 
-#### Download
+#### Download & Install
 
 Download the latest [tar](https://github.com/mulle-core/mulle-atinit/archive/refs/tags/latest.tar.gz) or [zip](https://github.com/mulle-core/mulle-atinit/archive/refs/tags/latest.zip) archive and unpack it.
-
-#### Install
 
 Install **mulle-atinit** into `/usr/local` with [cmake](https://cmake.org):
 
 ``` sh
-export MULLE_SDK_PATH="/usr/local"
-cmake -B build \
-      -DCMAKE_INSTALL_PREFIX="${MULLE_SDK_PATH}" \
-      -DCMAKE_PREFIX_PATH="${MULLE_SDK_PATH}" \
+PREFIX_DIR="/usr/local"
+cmake -B build                               \
+      -DMULLE_SDK_PATH="${PREFIX_DIR}"       \
+      -DCMAKE_INSTALL_PREFIX="${PREFIX_DIR}" \
+      -DCMAKE_PREFIX_PATH="${PREFIX_DIR}"    \
       -DCMAKE_BUILD_TYPE=Release &&
 cmake --build build --config Release &&
 cmake --install build --config Release
