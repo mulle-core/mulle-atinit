@@ -150,16 +150,17 @@ static void    mulle_atinit_trace( char *format, ...)
    va_end( args);
 }
 
-#ifndef MULLE_TEST
-static
-#endif
-void   mulle_atinit_run_callbacks( void)
+
+//
+// THIS MUST BE STATIC FOR TECHNICAL REASONS
+//
+static void   mulle_atinit_run_callbacks( void)
 {
    void   (*f)( void *);
    void   *userinfo;
    char   *comment;
 
-   mulle_atinit_trace( "mulle-atinit: Running callbacks\n");
+   mulle_atinit_trace( "mulle-atinit: Running callbacks of %p\n", &vars);
 
    //
    // Use a stable sort for priorities that keeps insertion order on equality.
@@ -201,10 +202,16 @@ loop:
    }
 }
 
-
-#ifndef MULLE_TEST
-static
+#ifdef MULLE_TEST
+// THIS MUST BE STATIC FOR TECHNICAL REASONS
+// what this approximatel
+void   mulle_atinit_test_run_callbacks( void)
+{
+   mulle_atinit_run_callbacks();
+}
 #endif
+
+
 void   mulle_atinit_add_callback( void (*f)( void *),
                                   void *userinfo,
                                   int priority,
@@ -270,8 +277,8 @@ void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *co
    }
    mulle_thread_mutex_unlock( &vars.lock);
 
-   mulle_atinit_trace( "mulle-atinit: add %p( %p) %s\n",
-                              (void *) f, userinfo, comment ? comment : "");
+   mulle_atinit_trace( "mulle-atinit: add %p( %p) \"%s\" to %p\n",
+                              (void *) f, userinfo, comment ? comment : "", &vars);
 }
 
 
@@ -293,27 +300,30 @@ void   mulle_atinit_dlsym( void (*f)( void *),
 // the `mulle_atinit` symbol. As this is statically linked it will be in the
 // same "load" domain, as main().
 //
-// Anyway this is how it should go:
+// Anyway this is how it goes:
 //
-// mulle-atinit: add 0x75055bae552d( 0x75055bae7083)
+// mulle-atinit: add 0x7ffff7fac52d( 0x7ffff7fae083)  to 0x555555559060
 // mulle-atinit: constructor
-// mulle-atinit: Running callbacks
-// mulle-atinit: add 0x75055baeb52d( 0x75055baed083)
+// mulle-atinit: Running callbacks in 0x7ffff7fb0100
+// mulle-atinit: add 0x7ffff7fb252d( 0x7ffff7fb4083)  to 0x555555559060
 // mulle-atinit: constructor
-// mulle-atinit: Running callbacks
-// mulle-atinit: add 0x75055baf152d( 0x75055baf3083)
+// mulle-atinit: Running callbacks in 0x7ffff7fb6100
+// mulle-atinit: add 0x7ffff7fb852d( 0x7ffff7fba083)  to 0x555555559060
 // mulle-atinit: constructor
-// mulle-atinit: Running callbacks
+// mulle-atinit: Running callbacks in 0x7ffff7fbc100
 // mulle-atinit: constructor
-// mulle-atinit: Running callbacks
-// mulle-atinit: call 0x75055baf152d( 0x75055baf3083)
-// mulle-atinit: call 0x75055bae552d( 0x75055bae7083)
-// mulle-atinit: call 0x75055baeb52d( 0x75055baed083)
+// mulle-atinit: Running callbacks in 0x555555559060
+// mulle-atinit: call 0x7ffff7fb852d( 0x7ffff7fba083)
 // x: "first"
+// mulle-atinit: call 0x7ffff7fac52d( 0x7ffff7fae083)
 // z: "mid"
+// mulle-atinit: call 0x7ffff7fb252d( 0x7ffff7fb4083)
 // y: "last"
 // main
 //
+// You can see that there are two "&vars" here. There is a difference between
+// what a global function does and what a static function does and we
+// exploit this
 //
 MULLE_C_CONSTRUCTOR( load_atinit)
 static void   load_atinit( void)

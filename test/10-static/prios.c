@@ -9,7 +9,7 @@ void   mulle_atinit_add_callback( void (*f)( void *),
                                   void *userinfo,
                                   int priority,
                                   char *comment);
-void   mulle_atinit_run_callbacks( void);
+void   mulle_atinit_test_run_callbacks( void);
 
 
 
@@ -30,7 +30,7 @@ int  main( void)
    mulle_atinit_add_callback( print, "4", 50, NULL);
    mulle_atinit_add_callback( print, "3", 100, NULL);
 
-   mulle_atinit_run_callbacks();
+   mulle_atinit_test_run_callbacks();
 
    return( 0);
 }
