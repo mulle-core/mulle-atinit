@@ -105,7 +105,7 @@ static void _prioritized_callback_mergesort( struct prioritized_callback *array,
    tmp = malloc( sizeof( struct prioritized_callback) * size);
    if( ! tmp)
       abort();
-   mergesort_internal( array, tmp, 0, size - 1);
+   mergesort_internal( array, tmp, 0, (int) size - 1);
    free( tmp);
 }
 
