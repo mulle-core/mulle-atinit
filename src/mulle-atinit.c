@@ -291,8 +291,29 @@ void   mulle_atinit_dlsym( void (*f)( void *),
 // this is supposed to be statically linked, not because of this initializer
 // (this could run in a shared lib too), but because of the availability of
 // the `mulle_atinit` symbol. As this is statically linked it will be in the
-// same "load" domain, as main() whereas shared libraries should have piled
-// up by now.
+// same "load" domain, as main().
+//
+// Anyway this is how it should go:
+//
+// mulle-atinit: add 0x75055bae552d( 0x75055bae7083)
+// mulle-atinit: constructor
+// mulle-atinit: Running callbacks
+// mulle-atinit: add 0x75055baeb52d( 0x75055baed083)
+// mulle-atinit: constructor
+// mulle-atinit: Running callbacks
+// mulle-atinit: add 0x75055baf152d( 0x75055baf3083)
+// mulle-atinit: constructor
+// mulle-atinit: Running callbacks
+// mulle-atinit: constructor
+// mulle-atinit: Running callbacks
+// mulle-atinit: call 0x75055baf152d( 0x75055baf3083)
+// mulle-atinit: call 0x75055bae552d( 0x75055bae7083)
+// mulle-atinit: call 0x75055baeb52d( 0x75055baed083)
+// x: "first"
+// z: "mid"
+// y: "last"
+// main
+//
 //
 MULLE_C_CONSTRUCTOR( load_atinit)
 static void   load_atinit( void)
