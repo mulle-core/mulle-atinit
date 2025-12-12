@@ -1,14 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-// Include the mergesort implementation here or in a separate header
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 // Corrected comparison function for integers
-int compare_ints(const void *a, const void *b) {
+static int compare_ints(const void *a, const void *b) {
     // a and b are pointers to elements in our array, which are already pointers to integers
     int *int_a = *(int **)a;
     int *int_b = *(int **)b;
@@ -20,7 +16,7 @@ int compare_ints(const void *a, const void *b) {
 typedef int (*cmp_t)(const void *, const void *);
 
 // Merge two sorted subarrays into one sorted array
-void merge(void **arr, void **temp, int left, int mid, int right, cmp_t compare) {
+static void merge(void **arr, void **temp, int left, int mid, int right, cmp_t compare) {
     int i, j, k;
 
     // Copy data to temp array
@@ -56,7 +52,7 @@ void merge(void **arr, void **temp, int left, int mid, int right, cmp_t compare)
 }
 
 // Main mergesort function
-void mergesort_internal(void **arr, void **temp, int left, int right, cmp_t compare) {
+static void mergesort_internal(void **arr, void **temp, int left, int right, cmp_t compare) {
     if (left < right) {
         int mid = left + (right - left) / 2;  // Find the middle point
 
@@ -69,8 +65,9 @@ void mergesort_internal(void **arr, void **temp, int left, int right, cmp_t comp
     }
 }
 
-// Public mergesort function
-void mergesort(void **arr, int size, cmp_t compare) {
+
+// dont ask me...
+static void custom_mergesort(void **arr, int size, cmp_t compare) {
     if (arr == NULL || size <= 1) {
         return;  // Already sorted
     }
@@ -109,7 +106,7 @@ int main() {
     }
     
     // Sort the array using mergesort
-    mergesort((void **)array, n, compare_ints);
+    custom_mergesort((void **)array, n, compare_ints);
     
     // Print the sorted array
     printf("Sorted array: ");

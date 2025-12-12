@@ -71,15 +71,16 @@ uint32_t   mulle_atinit_get_version( void);
 // we don't need it on __APPLE_ as the __attribute__((constructor)) order is
 // correct. On windows it seems hopeless, so we just give up.
 //
-#if 0 // defined( __APPLE__) // Seems we also need it on __APPLE__ now...
+// #if 0 // defined( __APPLE__) // Seems we also need it on __APPLE__ now...
+// 
+// static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment)
+// {
+//    (*f)( userinfo);
+// }
+// 
+// #else 
 
-static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment)
-{
-   (*f)( userinfo);
-}
-
-#else 
-
+#include <mulle-c11/mulle-c11.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -92,7 +93,11 @@ static inline void   mulle_atinit( void (*f)( void *), void *userinfo, int prior
 //    mulle_atinit( f, NULL, priority, NULL);
 // }
 //
-MULLE__ATINIT_GLOBAL
+#ifdef MULLE__ATINIT_BUILD
+MULLE_C_EXTERN_RENDEZVOUS_SYMBOL
+#else
+MULLE_C_RENDEZVOUS_SYMBOL
+#endif
 void   _mulle_atinit( void (*f)( void *), void *userinfo, int priority, char *comment);
 
 static inline void    mulle_atinit_trace_bummer( char *comment)
@@ -148,11 +153,11 @@ static inline void   mulle_atinit( void (*f)( void *),
    void   (*p_mulle_atinit)( void (*f)( void *), void *, int, char *);
 
 // MEMO: (nat) dubious now, used to be sensible :D
-#ifdef __WIN32
+# ifdef __WIN32
    p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "mulle_atinit_dlsym");
-#else
+# else
    p_mulle_atinit = dlsym( MULLE_RTLD_DEFAULT, "_mulle_atinit");
-#endif
+# endif
    if( ! p_mulle_atinit)
    {
       mulle_atinit_fail( f, userinfo, comment);
@@ -161,7 +166,6 @@ static inline void   mulle_atinit( void (*f)( void *),
    (*p_mulle_atinit)( f, userinfo, priority, comment);
 #endif
 }
-#endif
 
 
 #ifdef __has_include
