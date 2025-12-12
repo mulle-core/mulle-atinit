@@ -90,8 +90,7 @@ void mergesort_internal(void **arr, void **temp, int left, int right, cmp_t comp
     }
 }
 
-// Public mergesort function
-void mergesort(void **arr, int size, cmp_t compare) {
+static void custom_mergesort(void **arr, int size, cmp_t compare) {
     if (arr == NULL || size <= 1) {
         return;  // Already sorted
     }
@@ -122,7 +121,7 @@ void test_mergesort(const char **strings, size_t count, const char *description)
     }
     
     /* Run mergesort */
-    mergesort( (void **) strings, count, compare_strings_case_insensitive);
+    custom_mergesort( (void **) strings, count, compare_strings_case_insensitive);
     
     /* Print result */
     printf("\nAfter mergesort:\n");
