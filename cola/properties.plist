@@ -3,11 +3,14 @@
    {
       description="🤱🏼 Compatibility library for deterministic initializers";
       domain="github";
+      language="c";
+      dialect="c";
       name="mulle-atinit";
       user="mulle-core";
       repo="mulle-atinit";
       homepage="https://github.com/mulle-core/mulle-atinit";
       license="UNLICENSED";
+      version="0.2.0";
    };
    dependencies =
    (
