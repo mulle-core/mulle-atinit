@@ -12,10 +12,10 @@ endif()
 # for windows its important to hit the proper flags like
 # the libraries have been built with
 
-if( WIN32)
-   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Zi -DEBUG -MDd -Od -wd4068")
-endif()
-
+#if( WIN32)
+#   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Zi -DEBUG -MDd -Od -wd4068")
+#endif()
+#
 add_executable( dynamic.exe
 main.c
 )
@@ -60,9 +60,39 @@ target_link_libraries( dynamic.exe
 ${TEST_LIBRARIES}
 )
 
+elseif( WIN32)
+
+# Windows: Need to reference symbols to force DLL loading
+# Create a dummy reference file
+target_link_libraries( dynamic.exe
+x
+y
+z
+${TEST_LIBRARIES}
+)
+
+# Force symbol references by using --undefined
+target_link_options( dynamic.exe PRIVATE
+   "LINKER:--undefined=x"
+   "LINKER:--undefined=y"
+   "LINKER:--undefined=z"
+)
+
+target_link_libraries( x
+${TEST_LIBRARIES}
+)
+
+target_link_libraries( y
+${TEST_LIBRARIES}
+)
+
+target_link_libraries( z
+${TEST_LIBRARIES}
+)
+
 else()
 
-# if we don't do --no-as-needed there will be no reason
+# Linux: if we don't do --no-as-needed there will be no reason
 # to link the shared libraries
 target_link_libraries( dynamic.exe
 -Wl,--no-as-needed

@@ -1,4 +1,5 @@
 # mulle-atinit Library Documentation for AI
+<!-- Keywords: lifecycle, initialization -->
 
 ## 1. Introduction & Purpose
 
