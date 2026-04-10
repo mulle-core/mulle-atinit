@@ -1,5 +1,5 @@
 # mulle-atinit Library Documentation for AI
-<!-- Keywords: lifecycle, initialization -->
+<!-- Keywords: atinit,init,priority,constructor,version,dlfcn,thread -->
 
 ## 1. Introduction & Purpose
 
@@ -11,7 +11,7 @@
 
 - **Deferred Initialization:** Instead of executing code directly in a `__attribute__((constructor))`, a shared library calls `mulle_atinit` to register an initialization function. The actual execution is deferred.
 - **Centralized Execution:** A constructor in the `mulle-atinit` library itself is responsible for collecting all registered initializers and running them. Because `mulle-atinit` is linked into the main executable, its constructor runs after all shared libraries have been loaded but before `main` begins.
-- **Priority System:** Each registered initializer has a priority. Initializers are executed in ascending order of their priority value, allowing for explicit control over the initialization sequence. Libraries with lower priority numbers are initialized first.
+- **Priority System:** Each registered initializer has a priority. Initializers are executed in descending numeric order (callbacks with larger priority values run earlier). This allows explicit control over the initialization sequence: use higher numbers for earlier initialization.
 - **Static Linking Requirement:** For the system to work, `mulle-atinit` must be statically linked into the final executable, and linker flags must be used to ensure its symbols are exported and the entire library is included. This guarantees there is only one central registry for initializers.
 
 ## 3. Core API & Data Structures
@@ -67,7 +67,7 @@ The API is minimal and is fully defined in `mulle-atinit.h`. It does not expose 
 
 ### Example 1: Initializing Libraries in a Specific Order
 
-This example simulates three shared libraries (X, Y, Z) that need to be initialized in the order Z -> Y -> X. Library Z has the lowest priority, so it runs first.
+This example simulates three libraries (X, Y, Z) that register initialization callbacks with different priorities (100, 200, 300). Callbacks execute in descending priority order, so X (300) runs first, then Y (200), then Z (100).
 *Source: `test/20_dynamic/`*
 
 **Library Z (`z.c`)**
@@ -128,9 +128,9 @@ int main(void) {
 When compiled and run (with `libx`, `liby`, `libz` linked dynamically and `libmulle-atinit` linked statically to `main`), the output will be:
 
 ```
-Initializing Z
-Initializing Y
 Initializing X
+Initializing Y
+Initializing Z
 main() called
 ```
 
