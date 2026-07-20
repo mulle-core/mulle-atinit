@@ -10,7 +10,7 @@
       repo="mulle-atinit";
       homepage="https://github.com/mulle-core/mulle-atinit";
       license="UNLICENSED";
-      version="0.3.0";
+      version="0.3.1";
    };
    dependencies =
    (

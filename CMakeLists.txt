@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.13...99.99)
 
-project( mulle-atinit VERSION 0.3.0 LANGUAGES C)
+project( mulle-atinit VERSION 0.3.1 LANGUAGES C)
 
 
 
