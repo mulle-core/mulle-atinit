@@ -14,6 +14,11 @@ sequenced (e.g. an ELF shared library).
 
 
 
+
+## Documentation & Guides
+
+* [API Summary](asset/dox/api/toc)
+
 You must **statically** link the mulle-atinit library with your executable.
 Ensure that global symbols are exported and that the whole library is linked
 to the executable and not optimized away by the linker.
