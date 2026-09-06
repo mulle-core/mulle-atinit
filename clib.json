@@ -1,6 +1,6 @@
 {
    "name" : "mulle-atinit",
-   "version" : "0.3.1",
+   "version" : "0.3.2",
    "description" : "🤱🏼 Compatibility library for deterministic initializers",
    "keywords" : [],
    "license" : "UNLICENSED",
